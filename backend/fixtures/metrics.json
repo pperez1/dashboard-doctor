@@ -1,0 +1,254 @@
+[
+  {
+    "id": "net_asset_flow",
+    "name": "Net asset flow",
+    "source_table": "fct_net_flows",
+    "expected_refresh_cron": "0 6 * * 1-5",
+    "alert_threshold_pct": 10.0,
+    "mock_state": {
+      "last_refreshed": "2026-05-03T06:05:00Z",
+      "expected_refresh_by": "2026-05-03T06:00:00Z",
+      "etl_job_status": "success",
+      "row_count_today": 4821,
+      "row_count_yesterday": 4834,
+      "schema_changed": false,
+      "report_logic_valid": true,
+      "lineage": [
+        {
+          "layer": "Source",
+          "name": "Custody system",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:01:00Z"
+        },
+        {
+          "layer": "ETL",
+          "name": "fct_positions load",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:06:00Z"
+        },
+        {
+          "layer": "Model",
+          "name": "fct_net_flows",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:08:00Z"
+        },
+        {
+          "layer": "Report",
+          "name": "Morning ops dashboard",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:12:00Z"
+        }
+      ]
+    }
+  },
+  {
+    "id": "aum_by_portfolio",
+    "name": "AUM by portfolio",
+    "source_table": "fct_portfolio_aum",
+    "expected_refresh_cron": "0 6 * * 1-5",
+    "alert_threshold_pct": 10.0,
+    "mock_state": {
+      "last_refreshed": "2026-05-03T06:05:00Z",
+      "expected_refresh_by": "2026-05-03T06:00:00Z",
+      "etl_job_status": "success",
+      "row_count_today": 12890,
+      "row_count_yesterday": 12910,
+      "schema_changed": false,
+      "report_logic_valid": true,
+      "lineage": [
+        {
+          "layer": "Source",
+          "name": "Portfolio accounting",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:58:00Z"
+        },
+        {
+          "layer": "ETL",
+          "name": "fct_portfolio_aum load",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:03:00Z"
+        },
+        {
+          "layer": "Model",
+          "name": "fct_portfolio_aum",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:06:00Z"
+        },
+        {
+          "layer": "Report",
+          "name": "Morning ops dashboard",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:10:00Z"
+        }
+      ]
+    }
+  },
+  {
+    "id": "daily_settlement_count",
+    "name": "Daily settlement count",
+    "source_table": "fct_settlements",
+    "expected_refresh_cron": "0 6 * * 1-5",
+    "alert_threshold_pct": 10.0,
+    "mock_state": {
+      "last_refreshed": "2026-05-03T06:05:00Z",
+      "expected_refresh_by": "2026-05-03T06:00:00Z",
+      "etl_job_status": "success",
+      "row_count_today": 930,
+      "row_count_yesterday": 922,
+      "schema_changed": false,
+      "report_logic_valid": true,
+      "lineage": [
+        {
+          "layer": "Source",
+          "name": "Settlement platform",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:55:00Z"
+        },
+        {
+          "layer": "ETL",
+          "name": "fct_settlements load",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:01:00Z"
+        },
+        {
+          "layer": "Model",
+          "name": "fct_settlements",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:04:00Z"
+        },
+        {
+          "layer": "Report",
+          "name": "Morning ops dashboard",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:09:00Z"
+        }
+      ]
+    }
+  },
+  {
+    "id": "fee_revenue_mtd",
+    "name": "Fee revenue MTD",
+    "source_table": "fct_fee_revenue",
+    "expected_refresh_cron": "0 6 * * 1-5",
+    "alert_threshold_pct": 10.0,
+    "mock_state": {
+      "last_refreshed": "2026-05-03T06:05:00Z",
+      "expected_refresh_by": "2026-05-03T06:00:00Z",
+      "etl_job_status": "success",
+      "row_count_today": 431,
+      "row_count_yesterday": 428,
+      "schema_changed": false,
+      "report_logic_valid": true,
+      "lineage": [
+        {
+          "layer": "Source",
+          "name": "Billing system",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:50:00Z"
+        },
+        {
+          "layer": "ETL",
+          "name": "fct_fee_revenue load",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:57:00Z"
+        },
+        {
+          "layer": "Model",
+          "name": "fct_fee_revenue",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:03:00Z"
+        },
+        {
+          "layer": "Report",
+          "name": "Morning ops dashboard",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:11:00Z"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cash_position_summary",
+    "name": "Cash position summary",
+    "source_table": "fct_cash_positions",
+    "expected_refresh_cron": "0 6 * * 1-5",
+    "alert_threshold_pct": 10.0,
+    "mock_state": {
+      "last_refreshed": "2026-05-03T06:05:00Z",
+      "expected_refresh_by": "2026-05-03T06:00:00Z",
+      "etl_job_status": "success",
+      "row_count_today": 2102,
+      "row_count_yesterday": 2098,
+      "schema_changed": false,
+      "report_logic_valid": true,
+      "lineage": [
+        {
+          "layer": "Source",
+          "name": "Treasury ledger",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:52:00Z"
+        },
+        {
+          "layer": "ETL",
+          "name": "fct_cash_positions load",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:59:00Z"
+        },
+        {
+          "layer": "Model",
+          "name": "fct_cash_positions",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:04:00Z"
+        },
+        {
+          "layer": "Report",
+          "name": "Morning ops dashboard",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:09:00Z"
+        }
+      ]
+    }
+  },
+  {
+    "id": "trade_volume_daily",
+    "name": "Trade volume daily",
+    "source_table": "fct_trade_volume",
+    "expected_refresh_cron": "0 6 * * 1-5",
+    "alert_threshold_pct": 10.0,
+    "mock_state": {
+      "last_refreshed": "2026-05-03T06:05:00Z",
+      "expected_refresh_by": "2026-05-03T06:00:00Z",
+      "etl_job_status": "success",
+      "row_count_today": 7721,
+      "row_count_yesterday": 7698,
+      "schema_changed": false,
+      "report_logic_valid": true,
+      "lineage": [
+        {
+          "layer": "Source",
+          "name": "Order management system",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:56:00Z"
+        },
+        {
+          "layer": "ETL",
+          "name": "fct_trade_volume load",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:02:00Z"
+        },
+        {
+          "layer": "Model",
+          "name": "fct_trade_volume",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:06:00Z"
+        },
+        {
+          "layer": "Report",
+          "name": "Morning ops dashboard",
+          "status": "ok",
+          "last_ok": "2026-05-03T06:10:00Z"
+        }
+      ]
+    }
+  }
+]
