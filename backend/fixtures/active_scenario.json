@@ -1,0 +1,98 @@
+[
+  {
+    "id": "net_asset_flow",
+    "name": "Net asset flow",
+    "source_table": "fct_net_flows",
+    "expected_refresh_cron": "0 6 * * 1-5",
+    "alert_threshold_pct": 10.0,
+    "mock_state": {
+      "last_refreshed": "2026-05-03T06:05:00Z",
+      "expected_refresh_by": "2026-05-03T06:00:00Z",
+      "etl_job_status": "success",
+      "row_count_today": 4860,
+      "row_count_yesterday": 4834,
+      "schema_changed": false,
+      "report_logic_valid": true
+    }
+  },
+  {
+    "id": "aum_by_portfolio",
+    "name": "AUM by portfolio",
+    "source_table": "fct_portfolio_aum",
+    "expected_refresh_cron": "0 6 * * 1-5",
+    "alert_threshold_pct": 10.0,
+    "mock_state": {
+      "last_refreshed": "2026-05-03T06:05:00Z",
+      "expected_refresh_by": "2026-05-03T06:00:00Z",
+      "etl_job_status": "success",
+      "row_count_today": 4220,
+      "row_count_yesterday": 4190,
+      "schema_changed": false,
+      "report_logic_valid": true
+    }
+  },
+  {
+    "id": "daily_settlement_count",
+    "name": "Daily settlement count",
+    "source_table": "fct_settlements",
+    "expected_refresh_cron": "0 6 * * 1-5",
+    "alert_threshold_pct": 10.0,
+    "mock_state": {
+      "last_refreshed": "2026-05-03T06:05:00Z",
+      "expected_refresh_by": "2026-05-03T06:00:00Z",
+      "etl_job_status": "success",
+      "row_count_today": 1295,
+      "row_count_yesterday": 1280,
+      "schema_changed": false,
+      "report_logic_valid": true
+    }
+  },
+  {
+    "id": "fee_revenue_mtd",
+    "name": "Fee revenue MTD",
+    "source_table": "fct_fee_revenue",
+    "expected_refresh_cron": "0 6 * * 1-5",
+    "alert_threshold_pct": 10.0,
+    "mock_state": {
+      "last_refreshed": "2026-05-03T06:05:00Z",
+      "expected_refresh_by": "2026-05-03T06:00:00Z",
+      "etl_job_status": "success",
+      "row_count_today": 945,
+      "row_count_yesterday": 940,
+      "schema_changed": false,
+      "report_logic_valid": true
+    }
+  },
+  {
+    "id": "cash_position_summary",
+    "name": "Cash position summary",
+    "source_table": "fct_cash_positions",
+    "expected_refresh_cron": "0 6 * * 1-5",
+    "alert_threshold_pct": 10.0,
+    "mock_state": {
+      "last_refreshed": "2026-05-03T06:05:00Z",
+      "expected_refresh_by": "2026-05-03T06:00:00Z",
+      "etl_job_status": "success",
+      "row_count_today": 712,
+      "row_count_yesterday": 704,
+      "schema_changed": false,
+      "report_logic_valid": true
+    }
+  },
+  {
+    "id": "trade_volume_daily",
+    "name": "Trade volume daily",
+    "source_table": "fct_trade_volume",
+    "expected_refresh_cron": "0 6 * * 1-5",
+    "alert_threshold_pct": 10.0,
+    "mock_state": {
+      "last_refreshed": "2026-05-03T06:05:00Z",
+      "expected_refresh_by": "2026-05-03T06:00:00Z",
+      "etl_job_status": "success",
+      "row_count_today": 3582,
+      "row_count_yesterday": 3550,
+      "schema_changed": false,
+      "report_logic_valid": true
+    }
+  }
+]
