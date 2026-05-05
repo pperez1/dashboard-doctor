@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Severity, SeverityBadge } from "./SeverityBadge";
+import type { Severity } from "@/app/api";
+import { SeverityBadge } from "./SeverityBadge";
 
 type MetricRowProps = {
   metric: {
