@@ -1,6 +1,7 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
 
 export type Severity = "green" | "amber" | "red";
+export type DecisionAction = "distribute" | "hold" | "escalate";
 
 export type HealthMetric = {
   metric_id: string;
@@ -31,6 +32,13 @@ export type CheckResult = {
   detail: string;
 };
 
+export type IncidentDecision = {
+  action: DecisionAction;
+  note: string;
+  analyst: string;
+  decided_at: string;
+};
+
 export type IncidentDetail = {
   id: string;
   metric_id: string;
@@ -43,41 +51,49 @@ export type IncidentDetail = {
   checks: CheckResult[];
   status: string;
   detected_at: string;
-  decision: {
-    action: string;
-    note: string;
-    analyst: string;
-    decided_at: string;
-  } | null;
+  decision: IncidentDecision | null;
 };
 
 export type IncidentLogItem = {
   id: string;
   detected_at: string;
+  metric_id?: string;
   metric_name: string;
   severity: Severity;
   root_cause: string;
   status: string;
-  decision: string | null;
+  decision: DecisionAction | null;
   analyst: string | null;
 };
 
+export type ScenarioName = "red" | "amber" | "green";
+
 type IncidentLogResponse = {
+  page: number;
+  page_size: number;
+  total: number;
   incidents: IncidentLogItem[];
 };
 
-export async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
+async function apiFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...init,
     cache: "no-store",
     headers: {
       "Content-Type": "application/json",
-      ...init?.headers,
+      ...init.headers,
     },
   });
 
   if (!response.ok) {
-    throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+    let message = `${response.status} ${response.statusText}`;
+    try {
+      const body = await response.json();
+      message = body.detail ?? message;
+    } catch {
+      // Keep the HTTP status text when the API does not return JSON.
+    }
+    throw new Error(`Dashboard Doctor API request failed: ${message}`);
   }
 
   return response.json() as Promise<T>;
@@ -91,7 +107,7 @@ export function fetchIncident(id: string) {
   return apiFetch<IncidentDetail>(`/api/incidents/${id}`);
 }
 
-export async function fetchIncidentLog(status: string) {
+export async function fetchIncidentLog(status: string = "open") {
   const query = status === "all" ? "" : `?status=${encodeURIComponent(status)}`;
   const response = await apiFetch<IncidentLogResponse>(`/api/incidents${query}`);
   return response.incidents;
@@ -99,7 +115,7 @@ export async function fetchIncidentLog(status: string) {
 
 export function postDecision(
   incidentId: string,
-  payload: { action: string; note: string; analyst: string },
+  payload: { action: DecisionAction; note: string; analyst: string },
 ) {
   return apiFetch<{ decision_id: string; incident_id: string; decided_at: string }>(
     `/api/incidents/${incidentId}/decision`,
@@ -110,10 +126,15 @@ export function postDecision(
   );
 }
 
-export function loadScenario(name: "red" | "amber" | "green") {
-  return apiFetch(`/api/admin/load-scenario/${name}`, { method: "POST" });
+export function loadScenario(name: ScenarioName) {
+  return apiFetch<{ scenario: ScenarioName; created: number; summary: Record<Severity, number> }>(
+    `/api/admin/load-scenario/${name}`,
+    { method: "POST" },
+  );
 }
 
 export function runChecksNow() {
-  return apiFetch("/api/admin/run-checks-now", { method: "POST" });
+  return apiFetch<{ created: number; checked_at: string }>("/api/admin/run-checks-now", {
+    method: "POST",
+  });
 }

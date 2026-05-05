@@ -1,4 +1,4 @@
-type LineageItem = {
+export type LineageItem = {
   layer: string;
   name: string;
   status: string;
@@ -12,7 +12,17 @@ const dotClasses: Record<string, string> = {
   warning: "bg-amber-500",
   changed: "bg-amber-500",
   failed: "bg-red-500",
+  review: "bg-amber-500",
 };
+
+function formatTimestamp(value: string) {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(new Date(value));
+}
 
 export function LineageTimeline({ lineage }: { lineage: LineageItem[] }) {
   return (
@@ -38,7 +48,7 @@ export function LineageTimeline({ lineage }: { lineage: LineageItem[] }) {
               </div>
               <p className="mt-1 text-sm text-slate-600">{item.name}</p>
               <p className="mt-1 text-xs text-slate-400">
-                Last refreshed {new Date(item.last_ok).toLocaleString()}
+                Last refreshed {formatTimestamp(item.last_ok)}
               </p>
             </div>
           </div>
@@ -47,3 +57,5 @@ export function LineageTimeline({ lineage }: { lineage: LineageItem[] }) {
     </section>
   );
 }
+
+export default LineageTimeline;

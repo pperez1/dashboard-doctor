@@ -10,14 +10,18 @@ export function ScenarioSwitcher() {
   const router = useRouter();
   const [loading, setLoading] = useState<string | null>(null);
   const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
   async function handleScenario(name: (typeof SCENARIOS)[number]) {
     setLoading(name);
     setMessage("");
+    setError("");
     try {
       await loadScenario(name);
       setMessage(`${name[0].toUpperCase()}${name.slice(1)} scenario loaded.`);
       router.refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to load scenario");
     } finally {
       setLoading(null);
     }
@@ -26,10 +30,13 @@ export function ScenarioSwitcher() {
   async function handleRunChecks() {
     setLoading("checks");
     setMessage("");
+    setError("");
     try {
       await runChecksNow();
       setMessage("Checks re-run.");
       router.refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unable to run checks");
     } finally {
       setLoading(null);
     }
@@ -65,6 +72,9 @@ export function ScenarioSwitcher() {
         </div>
       </div>
       {message ? <p className="mt-3 text-xs text-slate-500">{message}</p> : null}
+      {error ? <p className="mt-3 text-xs font-medium text-red-600">{error}</p> : null}
     </div>
   );
 }
+
+export default ScenarioSwitcher;

@@ -12,7 +12,7 @@ type MetricRowProps = {
   };
 };
 
-export default function MetricRow({ metric }: MetricRowProps) {
+export function MetricRow({ metric }: MetricRowProps) {
   return (
     <div className="grid grid-cols-[1.5fr_1fr_0.8fr_1.4fr_auto] items-center gap-4 border-b border-slate-100 px-6 py-4 last:border-b-0">
       <div>
@@ -31,3 +31,5 @@ export default function MetricRow({ metric }: MetricRowProps) {
     </div>
   );
 }
+
+export default MetricRow;
